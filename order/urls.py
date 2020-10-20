@@ -1,0 +1,40 @@
+from django.urls import path
+from .api import (
+    Check_Client,
+    AddtoOrderItem,
+    GetOrderItems,
+    RemoveFromOrderItem,
+    AddToFavoriteList,
+    RemoveFromFavoriteList,
+    GetFavoriteList,
+    AddToBasketList,
+    AddComment,
+    TestingPayment,
+    IncomingList,
+    IncomingToOutgoing,
+    OutgoingList,
+)
+
+
+urlpatterns = [
+    path('check_client&user=<name>&<surname>&fb_id=<fb_id>&tel=<phone_number>',
+         Check_Client.as_view()),
+    path('add_to_cart&tel=<phone_number>&pro_id=<product_id>&qty=<quantity>&owner=<owner>/',
+         AddtoOrderItem.as_view()),
+    path('get_cart&tel=<phone_number>&owner=<owner>/', GetOrderItems.as_view()),
+    path('remove_from_cart&tel=<phone_number>&pro_id=<product_id>/',
+         RemoveFromOrderItem.as_view()),
+    path('add_favorite&tel=<phone_number>&pro_id=<product_id>&owner=<owner>/',
+         AddToFavoriteList.as_view()),
+    path('delete_favorite&tel=<phone_number>&pro_id=<product_id>/',
+         RemoveFromFavoriteList.as_view()),
+    path('get_favorite&tel=<phone_number>&owner=<owner>/',
+         GetFavoriteList.as_view()),
+    path('add_to_cart&tel=<phone_number>&deltype=<deliveryType>&paytype=<paymentType>&owner=<owner>/',
+         AddToBasketList.as_view()),
+    path('add_comment&tel=<phone_number>&owner=<owner>/', AddComment.as_view()),
+    path('payment&tel=<phone_number>&owner=<owner>/', TestingPayment.as_view()),
+    path('get_incoming_list/', IncomingList.as_view()),
+    path('add_to_outgoing/<pk>/', IncomingToOutgoing.as_view()),
+    path('get_outgoing_list/', OutgoingList.as_view()),
+]
