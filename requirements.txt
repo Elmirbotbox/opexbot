@@ -3,7 +3,6 @@ astroid==2.4.2
 atomicwrites==1.4.0
 attrs==20.2.0
 autopep8==1.5.4
-awsebcli==3.19.1
 botocore==1.17.63
 cement==2.8.2
 certifi==2020.6.20
@@ -22,6 +21,7 @@ djangorestframework-simplejwt==4.4.0
 djoser==2.0.3
 docutils==0.15.2
 future==0.16.0
+gunicorn==20.0.4
 idna==2.7
 iniconfig==1.0.1
 isort==5.5.2
