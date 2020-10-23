@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '3cu33*o-^3u8%z8e4%c98-y5znx!gx#mk&nz-*98q7u!!ii=f2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -85,40 +85,22 @@ WSGI_APPLICATION = 'opexbot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-if DEBUG == False:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-            'NAME': 'opexbotdb',
+        'NAME': 'opexbotdb',
 
-            'USER': 'opexbot_admin',
+        'USER': 'opexbot_admin',
 
-            'PASSWORD': 'testing123',
+        'PASSWORD': 'testing123',
 
-            'HOST': 'localhost',
+        'HOST': 'localhost',
 
-            'PORT': '',
+        'PORT': '',
 
-        }
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-            'NAME': 'opexbot',
-
-            'USER': 'postgres',
-
-            'PASSWORD': 'sufi4483',
-
-            'HOST': 'localhost',
-
-            'PORT': '5432',
-
-        }
-    }
+}
 
 
 # Password validation
