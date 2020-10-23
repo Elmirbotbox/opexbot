@@ -90,7 +90,7 @@ if DEBUG == False:
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-            'NAME': 'opexbotDB',
+            'NAME': 'opexbotdb',
 
             'USER': 'opexbot_admin',
 
@@ -98,7 +98,7 @@ if DEBUG == False:
 
             'HOST': 'localhost',
 
-            'PORT': '5432',
+            'PORT': '',
 
         }
     }
