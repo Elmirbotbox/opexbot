@@ -33,8 +33,8 @@ class ProductViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ProductSerializer
 
-    def get_queryset(self):
-        return Product.objects.filter(owner=self.request.user)
+    def get_queryset(self, request):
+        return Product.objects.filter(owner=self.request.user, context={"request": request})
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -90,7 +90,8 @@ class ProductListView(APIView):
         try:
             products = Product.objects.filter(
                 owner_category=owner_category, is_active=True)
-            serializer = ProductSerializer(products, many=True)
+            serializer = ProductSerializer(
+                products, many=True, context={"request": request})
             response = {
                 'success': True,
                 'product_list': serializer.data
@@ -111,7 +112,8 @@ class ProductDetailView(APIView):
     def get(self, request, pro_id):
         try:
             products = Product.objects.get(id=pro_id)
-            serializer = ProductSerializer(products, many=False)
+            serializer = ProductSerializer(
+                products, many=False, context={"request": request})
             response = {
                 'success': True,
                 'product_data': serializer.data

@@ -14,4 +14,9 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ('id', 'name', 'product_image', 'ingridients',
-                  'price', 'is_active')
+                  'price', 'is_active', 'photo_url')
+
+    def get_photo_url(self, obj):
+        request = self.context.get('request')
+        photo_url = obj.photo.url
+        return request.build_absolute_uri(photo_url)
