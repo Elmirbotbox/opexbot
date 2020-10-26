@@ -212,5 +212,3 @@ EMAIL_USE_TLS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'opexbot/media')
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
