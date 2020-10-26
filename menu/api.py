@@ -113,7 +113,7 @@ class ProductDetailView(APIView):
         try:
             products = Product.objects.get(id=pro_id)
             serializer = ProductSerializer(
-                products, )
+                products, many=False, context={"request": request})
             response = {
                 'success': True,
                 'product_data': serializer.data
