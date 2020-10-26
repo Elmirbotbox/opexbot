@@ -90,7 +90,7 @@ class ProductListView(APIView):
         try:
             products = Product.objects.filter(
                 owner_category=owner_category, is_active=True)
-            serializer = ProductSerializer(products, many=True)
+            serializer = ProductSerializer(products, many=True, context={"request": request})
             response = {
                 'success': True,
                 'product_list': serializer.data
@@ -111,7 +111,7 @@ class ProductDetailView(APIView):
     def get(self, request, pro_id):
         try:
             products = Product.objects.get(id=pro_id)
-            serializer = ProductSerializer(products, many=False)
+            serializer = ProductSerializer(products, many=False, context={"request": request})
             response = {
                 'success': True,
                 'product_data': serializer.data
