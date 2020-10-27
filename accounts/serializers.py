@@ -23,8 +23,11 @@ class UserSerializer(UserCreateSerializer):
 
     def get_profile_url(self, obj):
         request = self.context.get('request')
-        photo_url = obj.profile_image.url
-        return request.build_absolute_uri(photo_url)
+        if obj.profile_image:
+            photo_url = obj.profile_image.url
+            return request.build_absolute_uri(photo_url)
+        else:
+            return 'no image'
 
 
 class UserInfoUpdateSerializer(serializers.ModelSerializer):
