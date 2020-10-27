@@ -190,7 +190,7 @@ class GetFavoriteList(APIView):
             favoriteList = FavoriteList.objects.filter(
                 client_id=client_id, owner=owner)
             serializer = FavoriteListSerializer(
-                favoriteList, many=True)
+                favoriteList, many=True, context={"request": request})
             response = {
                 'success': True,
                 'product_data': serializer.data
@@ -216,7 +216,7 @@ class AddToBasketList(APIView):
             if BasketList.objects.filter(client_id=client_id, owner_id=owner, status=1).exists():
                 response = {
                     'success': False,
-                    'status': 'Already have ordersn in BasketList'
+                    'status': 'Already have orders in BasketList'
                 }
             else:
                 basketlist = BasketList.objects.create(

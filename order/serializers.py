@@ -23,7 +23,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
             'owner',
         )
 
-    def get_product(self, obj, request):
+    def get_product(self, obj):
         return ProductSerializer(obj.product).data
 
     def get_final_price(self, obj):
@@ -41,8 +41,8 @@ class FavoriteListSerializer(serializers.ModelSerializer):
             'owner'
         )
 
-    def get_product(self, obj, request):
-        return ProductSerializer(obj.product, context={"request": request}).data
+    def get_product(self, obj):
+        return ProductSerializer(obj.product).data
 
 
 class BasketListSerializer(serializers.ModelSerializer):
