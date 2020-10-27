@@ -24,7 +24,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
         )
 
     def get_product(self, obj, request):
-        return ProductSerializer(obj.product,  context={"request": request}).data
+        return ProductSerializer(obj.product).data
 
     def get_final_price(self, obj):
         return obj.get_final_price()

@@ -190,7 +190,7 @@ class GetFavoriteList(APIView):
             favoriteList = FavoriteList.objects.filter(
                 client_id=client_id, owner=owner)
             serializer = FavoriteListSerializer(
-                favoriteList, many=True, context={"request": request})
+                favoriteList, many=True)
             response = {
                 'success': True,
                 'product_data': serializer.data

@@ -11,12 +11,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 # Product Serializer
 class ProductSerializer(serializers.ModelSerializer):
-    photo_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         fields = ('id', 'name', 'product_image', 'ingridients',
-                  'price', 'is_active', 'photo_url')
-
-    def get_photo_url(self, obj):
-        return obj.product_image.url
+                  'price', 'is_active')
