@@ -163,7 +163,7 @@ class GetUserDetail(APIView):
 
     def get(self, request):
         user = self.get_object
-        user_serializer = UserSerializer(request.user)
+        user_serializer = UserSerializer(request.user, context={"request": request})
         return Response(user_serializer.data, status=status.HTTP_200_OK)
 
 
