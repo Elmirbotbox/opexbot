@@ -14,11 +14,17 @@ class UserCreateSerializer(UserCreateSerializer):
 
 
 class UserSerializer(UserCreateSerializer):
+    profile_url = serializers.SerializerMethodField()
 
     class Meta(UserCreateSerializer.Meta):
         model = User
-        fields = ('id', 'email', 'name', 'surname', 'username', 'password',
+        fields = ('id', 'email', 'name', 'surname', 'password',
                   'profile_image')
+
+    def get_profile_url(self, obj):
+        request = self.context.get('request')
+        photo_url = obj.profile_image.url
+        return request.build_absolute_uri(photo_url)
 
 
 class UserInfoUpdateSerializer(serializers.ModelSerializer):
