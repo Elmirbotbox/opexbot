@@ -19,7 +19,7 @@ class UserSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = User
         fields = ('id', 'email', 'name', 'surname', 'password',
-                  'profile_image')
+                  'profile_image', 'profile_url')
 
     def get_profile_url(self, obj):
         request = self.context.get('request')
