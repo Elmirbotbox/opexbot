@@ -132,7 +132,8 @@ class AddToFavoriteList(APIView):
     def post(self, request, phone_number, product_id, owner):
         try:
             client_id = Client.objects.get(phone_number=phone_number)
-            product = Product.objects.get(id=product_id, is_active=True)
+            product = Product.objects.get(
+                id=product_id, is_active=True, context={"request": request})
             if FavoriteList.objects.filter(client_id=client_id, product=product, owner=owner).exists():
                 response = {
                     'success': 'False',
@@ -161,7 +162,8 @@ class RemoveFromFavoriteList(APIView):
     def post(self, request, phone_number, product_id):
         try:
             client_id = Client.objects.get(phone_number=phone_number)
-            product_id = Product.objects.get(id=product_id)
+            product_id = Product.objects.get(
+                id=product_id, context={"request": request})
             FavoriteList.objects.filter(
                 client_id=client_id, product_id=product_id).delete()
             response = {
@@ -187,7 +189,8 @@ class GetFavoriteList(APIView):
             client_id = Client.objects.get(phone_number=phone_number)
             favoriteList = FavoriteList.objects.filter(
                 client_id=client_id, owner=owner)
-            serializer = FavoriteListSerializer(favoriteList, many=True)
+            serializer = FavoriteListSerializer(
+                favoriteList, many=True, context={"request": request})
             response = {
                 'success': True,
                 'product_data': serializer.data
