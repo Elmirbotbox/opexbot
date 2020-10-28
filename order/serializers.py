@@ -36,9 +36,7 @@ class FavoriteListSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavoriteList
         fields = (
-            'client_id',
             'product',
-            'owner'
         )
 
     def get_product(self, obj):
