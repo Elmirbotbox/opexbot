@@ -186,10 +186,11 @@ class GetFavoriteList(APIView):
         try:
             client_id = Client.objects.get(phone_number=phone_number)
             favoriteList = FavoriteList.objects.filter(
-                client_id=client_id, owner=owner)
-            favorite = FavoriteListSerializer(
-                favoriteList, many=True)
-            return Response(favorite.data, status=status.HTTP_200_OK)
+                client_id=client_id, owner=owner).annotate(Count('product'))
+            product = [i.product for i in favoriteList]
+            serializer = ProductSerializer(product, many=True)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except:
             response = {
                 'success': False,
