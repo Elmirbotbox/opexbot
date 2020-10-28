@@ -189,18 +189,15 @@ class GetFavoriteList(APIView):
             client_id = Client.objects.get(phone_number=phone_number)
             favoriteList = FavoriteList.objects.filter(
                 client_id=client_id, owner=owner)
-            serializer = FavoriteListSerializer(
-                favoriteList, many=True, context={"request": request})
-            response = {
-                'success': True,
-                'product_data': serializer.data
-            }
+            favorite = FavoriteListSerializer(
+                favoriteList, many=True)
+            return Response(favorite.data, status=status.HTTP_200_OK)
         except:
             response = {
                 'success': False,
                 'status': 'Not to find any items'
             }
-        return Response(response)
+            return Response(response)
 
 
 class AddToBasketList(APIView):
