@@ -113,9 +113,10 @@ class GetOrderItems(APIView):
                 client_id=client_id, owner=owner, is_ordered=False)
             serializer = OrderItemSerializer(order_items, many=True)
             total = sum([i['final_price'] for i in serializer.data])
+
             response = {
                 'success': True,
-                'product_list': serializer.data,
+                'product_list': [dict(i['product'], quantity=i['quantity']) for i in serializer.data],
                 'final_total_price': format(total, '.2f')
             }
         except:
