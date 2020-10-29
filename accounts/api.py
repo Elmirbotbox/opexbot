@@ -137,18 +137,8 @@ class UserInfoUpdateView(UpdateAPIView):
         obj = self.request.user
         return obj
 
-    def update(self, request):
-        user = self.get_object
-        try:
-            user_serializer = UserInfoUpdateSerializer(
-                request.user, data=request.data)
-            if user_serializer.is_valid():
-                user_serializer.save()
-                return Response(user_serializer.data, status=status.HTTP_200_OK)
-            else:
-                return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except:
-            return Response({'status': 0, 'message': 'Error on user update'})
+    def partial_update(self, request, *args, **kwargs):
+        return super().partial_update(request, *args, **kwargs)
 
 
 class GetUserDetail(APIView):
