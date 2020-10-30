@@ -37,4 +37,5 @@ urlpatterns = [
     path('get_incoming_list/', IncomingList.as_view()),
     path('add_to_outgoing/<pk>/', IncomingToOutgoing.as_view()),
     path('get_outgoing_list/', OutgoingList.as_view()),
+    path('get_ready_list/', ReadyList.as_view()),
 ]
