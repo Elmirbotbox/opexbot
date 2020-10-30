@@ -8,6 +8,7 @@ from .api import (
     ProductUpdateView,
     ProductListView,
     ProductDetailView,
+    CategoryProductListView
 )
 
 
