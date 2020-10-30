@@ -10,6 +10,7 @@ from .serializers import CategorySerializer, ProductSerializer
 from .models import Category, Product
 from rest_framework.views import APIView
 from django.conf import settings
+from django.db.models import Count
 User = settings.AUTH_USER_MODEL
 
 
@@ -121,3 +122,17 @@ class ProductDetailView(APIView):
                 'success': False
             }
         return Response(response)
+
+    
+class CategoryProductListView(APIView):
+    permissions_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    def get(self, request):
+        category = Category.objects.filter(
+            owner=self.request.user).annotate(Count('id'))
+        ids = [dict(id=i.id, name=i.name, mehsul=ProductSerializer(
+            Product.objects.filter(owner_category=i.id), many=True).data) for i in category]
+
+        return Response(ids)
