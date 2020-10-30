@@ -46,13 +46,14 @@ class FavoriteListSerializer(serializers.ModelSerializer):
 class BasketListSerializer(serializers.ModelSerializer):
     items = serializers.SerializerMethodField()
     total = serializers.SerializerMethodField()
+    client = serializers.SerializerMethodField()
 
     class Meta:
         model = BasketList
         fields = (
             'id',
             'daily_id',
-            'client_id',
+            'client',
             'time',
             'items',
             'owner',
@@ -68,3 +69,6 @@ class BasketListSerializer(serializers.ModelSerializer):
 
     def get_items(self, obj):
         return OrderItemSerializer(obj.items.all(), many=True).data
+
+    def get_client(self, obj):
+        return ClientSerializers(obj.client_id).data
