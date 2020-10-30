@@ -375,7 +375,7 @@ class OutgoingToReady(APIView):
         basket.status = 4
 
         
-class ReadyList(APIView):
+class ReadyList(ListAPIView):
     
     permissions_classes = [
         permissions.IsAuthenticated,
