@@ -373,3 +373,18 @@ class OutgoingToReady(APIView):
     def put(self, request, pk):
         basket = BasketList.objects.get(id=pk, owner=self.request.user)
         basket.status = 4
+
+        
+class ReadyList(APIView):
+    
+    permissions_classes = [
+        permissions.IsAuthenticated,
+    ]
+
+    serializer_class = BasketListSerializer
+
+    def get_queryset(self):
+        return BasketList.objects.filter(owner=self.request.user, status=4)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
