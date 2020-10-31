@@ -193,12 +193,20 @@ class CourierDeleteView(DestroyAPIView):
         return Courier.objects.filter(owner=self.request.user)
 
 
-class CourierList(ListAPIView):
+class CourierList(APIView):
     permissions_classes = [
         permissions.IsAuthenticated,
     ]
 
-    serializer_class = CourierListSerializer
-
-    def get_queryset(self):
-        return Courier.objects.filter(owner=self.request.user)
+    def get(self, request):
+        try:
+            couriers = Courier.objects.filter(owner=self.request.user)
+            serializer = CourierListSerializer(couriers, many=True)
+            response = {
+                'courier': serializer.data
+            }
+        except:
+            response = {
+                "success": False
+            }
+        return Response(response)
