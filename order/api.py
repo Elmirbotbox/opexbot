@@ -243,7 +243,7 @@ class AddComment(APIView):
         permissions.AllowAny
     ]
 
-    def put(self, request, phone_number, owner):
+    def post(self, request, phone_number, owner):
         client_id = Client.objects.get(phone_number=phone_number)
         try:
             if BasketList.objects.filter(client_id=client_id, owner_id=owner, status=1).exists():
@@ -274,7 +274,7 @@ class TestingPayment(APIView):
         permissions.AllowAny
     ]
 
-    def put(self, request, phone_number, owner):
+    def post(self, request, phone_number, owner):
         client_id = Client.objects.get(phone_number=phone_number)
         try:
             if BasketList.objects.filter(client_id=client_id, owner_id=owner, status=1).exists():
@@ -312,7 +312,7 @@ class IncomingList(ListAPIView):
     serializer_class = BasketListSerializer
 
     def get_queryset(self):
-        return BasketList.objects.filter(owner=self.request.user, status=2)
+        return BasketList.objects.filter(owner=self.request.user, status=2).order_by('-created_at')
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
