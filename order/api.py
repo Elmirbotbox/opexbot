@@ -358,7 +358,7 @@ class OutgoingList(ListAPIView):
     serializer_class = BasketListSerializer
 
     def get_queryset(self):
-        return BasketList.objects.filter(owner=self.request.user, status=3)
+        return BasketList.objects.filter(owner=self.request.user, status=3).order_by('-being_delievered')
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
