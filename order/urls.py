@@ -14,6 +14,7 @@ from .api import (
     IncomingToOutgoing,
     OutgoingList,
     ReadyList,
+    OutgoingToReady,
 )
 
 
@@ -39,4 +40,5 @@ urlpatterns = [
     path('add_to_outgoing/<pk>/', IncomingToOutgoing.as_view()),
     path('get_outgoing_list/', OutgoingList.as_view()),
     path('get_ready_list/', ReadyList.as_view()),
+    path('add_to_ready/<pk>/', OutgoingToReady.as_view()),
 ]
