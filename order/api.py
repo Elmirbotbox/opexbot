@@ -373,6 +373,7 @@ class OutgoingToReady(APIView):
     def put(self, request, pk):
         basket = BasketList.objects.get(id=pk, owner=self.request.user)
         basket.status = 4
+        basket.save()
         response = {
             'success': True
         }
