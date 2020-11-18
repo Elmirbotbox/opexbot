@@ -373,6 +373,10 @@ class OutgoingToReady(APIView):
     def put(self, request, pk):
         basket = BasketList.objects.get(id=pk, owner=self.request.user)
         basket.status = 4
+        response = {
+            'success': True
+        }
+        return Response(response)
 
         
 class ReadyList(ListAPIView):
