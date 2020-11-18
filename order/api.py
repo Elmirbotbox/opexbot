@@ -350,6 +350,25 @@ class IncomingToOutgoing(APIView):
         return Response(response)
 
 
+class Test123(APIView):
+    def put(self, request, pk):
+        try:
+            basket = BasketList.objects.get(id=pk, owner=self.request.user)
+            basket.status = 3
+            basket.being_delievered = timezone.now()
+            basket.save()
+            response = {
+                'success': True
+            }
+        except:
+            response = {
+                'success': False,
+                'status': 'error'
+            }
+        return Response(response)
+    
+
+
 class OutgoingList(ListAPIView):
     permissions_classes = [
         permissions.IsAuthenticated,
