@@ -351,6 +351,11 @@ class IncomingToOutgoing(APIView):
 
 
 class Test123(APIView):
+    
+    permissions_classes = [
+        permissions.IsAuthenticated,
+    ]
+    
     def put(self, request, pk):
         try:
             basket = BasketList.objects.get(id=pk, owner=self.request.user)
